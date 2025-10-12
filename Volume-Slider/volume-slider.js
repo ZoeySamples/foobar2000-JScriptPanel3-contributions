@@ -7,6 +7,15 @@
 
 // name, pixels, font_weight (400 = normal, 700 = bold)
 var font_string = CreateFontString("Segoe UI", 10, 700);
+var colours = {
+	text : RGB(0, 0, 0),
+	background : RGB(240, 240, 240),
+	unfilled1 : RGB(210, 210, 210),
+	unfilled2 : RGB(160, 160, 160),
+	progress1 : RGB(215, 235, 250),
+	progress2 : RGB(130, 190, 250),
+	slider : RGB(145, 90, 170),
+};
 
 var drag = false;
 var ww = 0, wh = 0, pad = 0;
@@ -39,12 +48,12 @@ function on_paint(gr) {
 	var pos = ww * vol2pos(volume);
 	var txt = volume.toFixed(2) + 'dB';
 
-	gr.Clear(RGB(240, 240, 240));
-	FillGradientRectangle(gr, left_pad, wh/4, ratio*pos, wh/2, 0, RGB(240, 240, 240), RGB(130, 220, 140));
-	FillGradientRectangle(gr, left_pad + ratio*pos, wh/4, ratio*(ww - pos), wh/2, 0, RGB(240, 240, 240), RGB(190, 190, 190));
-	gr.DrawRectangle(left_pad, wh/4, ratio*ww+1, wh/2, 1.0, RGB(150, 150, 150));
-	gr.WriteTextSimple(txt, font_string, RGB(64, 64, 128), 0, 0, left_pad, wh, 2, 2);
-	gr.FillEllipse(left_pad + ratio*pos, wh/2, 4, wh/4, RGB(158, 60, 164));	
+	gr.Clear(colours.background);
+	FillGradientRectangle(gr, left_pad, .36*wh, ratio*pos, .3*wh, 0, colours.progress1, colours.progress2);
+	FillGradientRectangle(gr, left_pad + ratio*pos, .36*wh, ratio*(ww - pos), .3*wh, 0, colours.unfilled1, colours.unfilled2);
+	gr.DrawRectangle(left_pad, .36*wh, ratio*ww+1, .3*wh, 1.0, colours.unfilled1);
+	gr.WriteTextSimple(txt, font_string, RGB(0, 0, 0), 0, 0, left_pad, wh, 2, 2);
+	gr.FillEllipse(left_pad + ratio*pos, .51*wh, 4, wh/6, colours.slider);	
 }
 
 function on_size() {
