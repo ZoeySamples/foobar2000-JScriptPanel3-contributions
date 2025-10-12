@@ -9,7 +9,6 @@
 // ==/PREPROCESSOR==
 
 var colours = {
-	buttons : RGB(255, 255, 255),
 	background : RGB(240, 240, 240),
 };
 
