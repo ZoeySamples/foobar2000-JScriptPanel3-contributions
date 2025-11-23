@@ -184,7 +184,7 @@ function on_mouse_move(x, y) {
 
 function on_key_down(k) {
 	//images.key_down(k);
-	// Hide the butons and extra details by hitting Alt
+	// Hide the butons and extra details by hitting H
 	if (k == 72) {
 		hide_clutter = !hide_clutter;
 		buttons.update();
