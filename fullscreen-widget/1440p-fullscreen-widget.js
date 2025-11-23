@@ -58,7 +58,7 @@ var buttons = new _buttons();
 var bs = _scale(0.6*button_size);
 
 // Set the folder name to be the location of your playback icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\superpanel\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\fullscreen_widget\\";
 var img = utils.LoadImage(folder_name + "previous.png");
 var previous_img = get_button_image(img, 0.8*bs, bs);
 
@@ -80,11 +80,9 @@ var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
 var img = utils.LoadImage(folder_name + "monitor2_light.png");
 var switch_monitor = get_button_image(img, 32, 48);
 
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
 var img = utils.LoadImage(folder_name + "browse_light.png");
 var browse = get_button_image(img, 40, 40);
 
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
 var img = utils.LoadImage(folder_name + "invisible.png");
 var hide = get_button_image(img, 36, 36);
 
@@ -187,7 +185,7 @@ function on_mouse_move(x, y) {
 
 function on_key_down(k) {
 	//images.key_down(k);
-	// Hide the butons and extra details by hitting Alt
+	// Hide the butons and extra details by hitting H
 	if (k == 72) {
 		hide_clutter = !hide_clutter;
 		buttons.update();
