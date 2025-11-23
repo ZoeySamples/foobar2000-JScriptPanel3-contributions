@@ -1,5 +1,5 @@
 // ==PREPROCESSOR==
-// @name "Vertical Playback Widget"
+// @name "1080p Vertical Playback Widget"
 // @author "marc2003"
 // @contributors "scarbles"
 // @import "lodash"
@@ -59,7 +59,7 @@ var buttons = new _buttons();
 var bs = _scale(0.6*button_size);
 
 // Set the folder name to be the location of your playback icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\playback_panel\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\playback_widget\\";
 var img = utils.LoadImage(folder_name + "previous.png");
 var previous_img = get_button_image(img, 0.8*bs, bs);
 
@@ -77,7 +77,7 @@ var img = utils.LoadImage(folder_name + "shuffle_on.png");
 var shuffle_on_img = get_button_image(img, 0.8*bs, bs);
 
 // Set the folder name to be the location of your special icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout_buttons\\";
 var img = utils.LoadImage(folder_name + "monitor1_dark.png");
 var switch_monitor = get_button_image(img, 34*(16/13), 34);
 
