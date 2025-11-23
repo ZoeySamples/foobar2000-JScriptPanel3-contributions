@@ -60,7 +60,7 @@ var buttons = new _buttons();
 var bs = _scale(0.6*button_size);
 
 // set folder_name to be the location of your playback icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\playback_panel\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\playback_widget\\";
 var img = utils.LoadImage(folder_name + "previous.png"); // Replace with your file location
 var previous_img = get_button_image(img, 0.8*bs, bs);
 
@@ -80,7 +80,7 @@ var img = utils.LoadImage(folder_name + "shuffle_on.png"); // Replace with your 
 var shuffle_on_img = get_button_image(img, 0.8*bs, bs);
 
 // set folder_name to be the location of your layout icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout_buttons\\";
 var img = utils.LoadImage(folder_name + "monitor2_dark.png"); // Replace with your file location
 var switch_monitor = get_button_image(img, 32, 48);
 
