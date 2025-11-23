@@ -1,5 +1,5 @@
 // ==PREPROCESSOR==
-// @name "Fullscreen Widget"
+// @name "1440p Fullscreen Widget"
 // @author "marc2003"
 // @contributors "scarbles"
 // @import "lodash"
@@ -76,7 +76,7 @@ var img = utils.LoadImage(folder_name + "shuffle_on.png");
 var shuffle_on_img = get_button_image(img, 0.8*bs, bs);
 
 // Set the folder name to be the location of your special icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout_buttons\\";
 var img = utils.LoadImage(folder_name + "monitor2_light.png");
 var switch_monitor = get_button_image(img, 32, 48);
 
@@ -185,7 +185,7 @@ function on_mouse_move(x, y) {
 
 function on_key_down(k) {
 	//images.key_down(k);
-	// Hide the butons and extra details by hitting H
+	// Hide the butons and extra details by hitting Alt
 	if (k == 72) {
 		hide_clutter = !hide_clutter;
 		buttons.update();
