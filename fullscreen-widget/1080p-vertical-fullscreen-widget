@@ -1,5 +1,5 @@
 // ==PREPROCESSOR==
-// @name "Vertical Fullscreen Widget"
+// @name "1080p Vertical Fullscreen Widget"
 // @author "marc2003"
 // @contributors "scarbles"
 // @import "lodash"
@@ -76,15 +76,13 @@ var img = utils.LoadImage(folder_name + "shuffle_on.png");
 var shuffle_on_img = get_button_image(img, 0.8*bs, bs);
 
 // Set the folder name to be the location of your special icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout_buttons\\";
 var img = utils.LoadImage(folder_name + "monitor1_light.png");
 var switch_monitor = get_button_image(img, 34*(16/13), 34);
 
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
 var img = utils.LoadImage(folder_name + "browse_light.png");
 var browse = get_button_image(img, 38, 38);
 
-var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
 var img = utils.LoadImage(folder_name + "invisible.png");
 var hide = get_button_image(img, 32, 32);
 
@@ -184,7 +182,7 @@ function on_mouse_move(x, y) {
 
 function on_key_down(k) {
 	//images.key_down(k);
-	// Hide the butons and extra details by hitting H
+	// Hide the butons and extra details by hitting Alt
 	if (k == 72) {
 		hide_clutter = !hide_clutter;
 		buttons.update();
