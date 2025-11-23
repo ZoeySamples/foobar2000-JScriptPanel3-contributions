@@ -2,7 +2,9 @@ In order to use these scripts, you'll need to do a few things.
 
 1. Make sure JScript Panel is installed in foobar2000. I have included the
    download to the component on the root directory.
-2. Download the icons I've provided, or make your own, and put them in a place
+2. Download the icons I've provided in the root directory/foobar2000_icons.
+   The images you need for these widgets are in fullscreen_widget and layout_buttons.
+   Alternatively, you can make your own icons. Put these icons in a place
    you can remember*.
 3. Download images-smaller-art.js from this folder, and place it in this
    folder:
