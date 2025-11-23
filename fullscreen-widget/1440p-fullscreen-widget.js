@@ -1,0 +1,419 @@
+// ==PREPROCESSOR==
+// @name "Fullscreen Widget"
+// @author "marc2003"
+// @contributors "scarbles"
+// @import "lodash"
+// @import "%fb2k_component_path%helpers.txt"
+// @import "%fb2k_component_path%samples\js\common.js"
+// @import "%fb2k_component_path%samples\js\seekbar.js"
+// @import "%fb2k_component_path%samples\js\panel.js"
+// @import "%fb2k_component_path%custom\images-smaller-art.js"
+// ==/PREPROCESSOR==
+
+var stopped = true;
+var show_special_buttons = false;
+
+var tfo = {
+	playback_time : fb.TitleFormat('[%playback_time%]'),
+	length : fb.TitleFormat('$if2(%length%,LIVE)'),
+};
+
+var info = {
+	artist : fb.TitleFormat('[%artist%]'),
+	title : fb.TitleFormat('[%title%]'),
+};
+
+var font = {
+	big : CreateFontString("Segoe UI", 20, 700),
+	small : CreateFontString("Segoe UI", 16, 700),
+	tiny : CreateFontString("Segoe UI", 13, 700),
+};
+
+var colours = {
+	light : RGB(240, 240, 240),
+	dark : RGB(0, 0, 0),
+	text_background : RGBA(20, 20, 20, 100),
+	text_background_fade : RGBA(20, 20, 20, 0),
+	outline : RGBA(250, 250, 250, 40),
+	progress1 : RGBA(250, 250, 250, 130),
+	progress2 : RGBA(250, 250, 250, 0),
+};
+
+var seekbar = new _seekbar(0, 0, 0, 0);
+var panel = new _panel();
+var images = new _images();
+
+var g_count = 0;
+var g_timer_interval, g_timeout;
+var g_timer_started = false;
+
+var show_volume = false;
+var ww = 0, wh = 0;
+var time_passed = 0;
+
+var button_size = 88;
+
+var panel = new _panel();
+var buttons = new _buttons();
+var bs = _scale(0.6*button_size);
+
+// Set the folder name to be the location of your playback icons
+var folder_name = "D:\\Pictures\\foobar2000 icons\\superpanel\\";
+var img = utils.LoadImage(folder_name + "previous.png");
+var previous_img = get_button_image(img, 0.8*bs, bs);
+
+var img = utils.LoadImage(folder_name + "play.png");
+var play_img = get_button_image(img, 0.8*bs, bs);
+var img = utils.LoadImage(folder_name + "pause.png");
+var pause_img = get_button_image(img, 0.8*bs, bs);
+
+var img = utils.LoadImage(folder_name + "next.png");
+var next_img = get_button_image(img, 0.8*bs, bs);
+
+var img = utils.LoadImage(folder_name + "shuffle_off.png");
+var shuffle_off_img = get_button_image(img, 0.8*bs, bs);
+var img = utils.LoadImage(folder_name + "shuffle_on.png");
+var shuffle_on_img = get_button_image(img, 0.8*bs, bs);
+
+// Set the folder name to be the location of your special icons
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var img = utils.LoadImage(folder_name + "monitor2_light.png");
+var switch_monitor = get_button_image(img, 32, 48);
+
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var img = utils.LoadImage(folder_name + "browse_light.png");
+var browse = get_button_image(img, 40, 40);
+
+var folder_name = "D:\\Pictures\\foobar2000 icons\\layout-buttons\\";
+var img = utils.LoadImage(folder_name + "invisible.png");
+var hide = get_button_image(img, 36, 36);
+
+panel.item_focus_change();
+
+var is_shuffled = false;
+var hide_clutter = false;
+//var show_k = "";
+
+function get_button_image(img, size_x, size_y) {
+	var src_w = img.Width;
+	var src_h = img.Height;
+	
+	var button_image = utils.CreateImage(size_x, size_y);
+	var temp_gr = button_image.GetGraphics();
+	temp_gr.DrawImage(img, 0, 0, size_x, size_y, 0, 0, src_w, src_h);
+	button_image.ReleaseGraphics();
+	return button_image;
+}
+
+function change_bool(bool) {
+	return !bool;
+}
+
+buttons.update = function () {
+	this.buttons.previous = new _button(button_pos.x, button_pos.y, bs, bs, {}, null, function () {
+			fb.RunMainMenuCommand("Playback/Previous");
+			});//, 'Previous');
+	
+	if (!stopped && !fb.IsPaused) {
+		this.buttons.playpause = new _button(button_pos.x + button_pos.space, button_pos.y, bs, bs, {}, null, function () {
+			fb.RunMainMenuCommand("Playback/Play or pause");
+			});//, 'Pause');
+    }
+	else {
+		this.buttons.playpause = new _button(button_pos.x + button_pos.space, button_pos.y, bs, bs, {}, null, function () {
+			fb.RunMainMenuCommand("Playback/Play or pause");
+			});//, 'Play');
+    }
+	
+	this.buttons.next = new _button(button_pos.x + 2*button_pos.space, button_pos.y, bs, bs, {}, null, function () {
+			fb.RunMainMenuCommand("Playback/Next");
+			});//, 'Next');
+	
+	if (is_shuffled) {
+		this.buttons.shuffle = new _button(button_pos.x + 3*button_pos.space, button_pos.y, bs, bs, {}, null, function () {
+			fb.RunMainMenuCommand("Playback/Order/Default");
+			});//, 'Unshuffle');
+    }
+	else {
+		this.buttons.shuffle = new _button(button_pos.x + 3*button_pos.space, button_pos.y, bs, bs, {}, null, function () {
+			fb.RunMainMenuCommand("Playback/Order/Shuffle (tracks)");
+			});//, 'Shuffle');
+    }
+	
+	this.buttons.switch_monitor = new _button(monitor_x, monitor_y, monitor_w, monitor_h, {}, null, function () {
+		fb.RunMainMenuCommand("View/Layout/Now Playing (1080)");
+		});//, 'Switch to 1080p layout');
+
+	this.buttons.browse = new _button(browse_x, browse_y, browse_w, browse_h, {}, null, function () {
+		fb.RunMainMenuCommand("View/Layout/Browse (1440)");
+		});//, 'Switch to Browse layout');
+	
+	this.buttons.toolbar = new _button(toolbar_x, toolbar_y, toolbar_w, toolbar_h, {}, null, function () {
+		fb.RunMainMenuCommand("View/Show Toolbars");
+		});//, 'Toggle Visible Toolbar');
+}
+
+function on_http_request_done(task_id, success, response_text) {
+	images.http_request_done(task_id, success, response_text);
+}
+
+function on_mouse_lbtn_down(x, y) {
+	seekbar.lbtn_down(x, y);
+	window.Repaint();
+}
+
+function on_mouse_lbtn_up(x, y) {
+	seekbar.lbtn_up(x, y);
+	buttons.lbtn_up(x, y);
+}
+
+function on_mouse_leave() {
+	buttons.leave();
+}
+
+function on_mouse_wheel(delta) {
+	if ((delta > 0)) {
+		fb.VolumeUp();
+	} else {
+		fb.VolumeDown();
+	g_count = 0;
+	}
+}
+
+function on_mouse_move(x, y) {
+	seekbar.move(x, y);
+	buttons.move(x, y);
+}
+
+function on_key_down(k) {
+	//images.key_down(k);
+	// Hide the butons and extra details by hitting Alt
+	if (k == 72) {
+		hide_clutter = !hide_clutter;
+		buttons.update();
+		window.Repaint();
+	}
+	//show_k = k;
+}
+
+function on_metadb_changed(handles, fromhook) {
+	if (fromhook)
+		return;
+
+	images.metadb_changed();
+}
+
+function run_g_timer(time) {
+	timer_over = false;
+	if (!g_timer_started) {
+		g_count = 0;
+		g_timeout = window.SetTimeout(function() {
+		}, 2000);
+		// Set timer interval to 500 ms
+		g_timer_interval = window.SetInterval(function() {
+			g_count++;
+		}, 500);
+		
+		g_timer_started = true;
+	}
+	if (g_count > time) {
+		g_count = 0;
+		g_timer_started = false;
+		timer_over = true;
+		window.ClearTimeout(g_timeout);
+		window.ClearInterval(g_timer_interval);
+	}
+	return timer_over;
+}
+
+function on_playback_seek() {
+	seekbar.playback_seek();
+}
+
+function on_paint(gr) {
+	// Display image of album art
+	panel.paint(gr);
+	images.paint(gr);	
+	
+	// Use this line if you want a quick way to see which keypress corresponds to which
+	// integer. You'll have to un-comment the other lines of code with 'show_k' in it.
+	//gr.WriteText(show_k, font.big, colours.light, 100, 100, 100, 100, 2, 2);
+	
+	if (fb.IsPlaying) {
+		// Display track and artist info
+		FillGradientRectangle(gr, 0.25*ww, 0.77*wh, 0.25*ww, 0.08*wh, 1, colours.text_background_fade, colours.text_background);
+		FillGradientRectangle(gr, 0.5*ww, 0.77*wh, 0.25*ww, 0.08*wh, 1, colours.text_background, colours.text_background_fade);
+		gr.WriteText(info.title.Eval(), font.big, colours.dark, 0, 0.74*wh+1, ww, 0.1*wh, 2, 2);
+		gr.WriteText(info.artist.Eval(), font.small, colours.dark, 0, 0.775*wh+1, ww, 0.1*wh, 2, 2);
+		gr.WriteText(info.title.Eval(), font.big, colours.light, 2, 0.74*wh, ww, 0.1*wh, 2, 2);
+		gr.WriteText(info.artist.Eval(), font.small, colours.light, 2, 0.775*wh, ww, 0.1*wh, 2, 2);
+		
+		// Display seekbar info
+		gr.DrawRectangle(seekbar.x, seekbar.y, seekbar.w, seekbar.h, 1.5, colours.outline);
+		var seekbar_text_pos = {
+			left_x : seekbar.x - 112,
+			right_x : seekbar.x + seekbar.w + 12,
+			y : seekbar.y-7,
+		};
+		if (!hide_clutter) {
+			gr.WriteText(tfo.playback_time.Eval(), font.tiny, colours.dark, seekbar_text_pos.left_x-2, seekbar_text_pos.y, 100, 100, 1, 0);
+			gr.WriteText(tfo.length.Eval(), font.tiny, colours.dark, seekbar_text_pos.right_x-2, seekbar_text_pos.y, 100, 100, 0, 0);
+			gr.WriteText(tfo.playback_time.Eval(), font.tiny, colours.light, seekbar_text_pos.left_x, seekbar_text_pos.y, 100, 100, 1, 0);
+			gr.WriteText(tfo.length.Eval(), font.tiny, colours.light, seekbar_text_pos.right_x, seekbar_text_pos.y, 100, 100, 0, 0);
+		}
+		if (fb.PlaybackLength > 0) {
+			FillGradientRectangle(gr, seekbar.x, seekbar.y, seekbar.pos(), seekbar.h, 0, colours.progress1, colours.progress2);
+		}
+	}
+	
+	// Display playback buttons
+	if (!hide_clutter) {
+		buttons.paint(gr);
+		gr.DrawImage(previous_img, button_pos.x, button_pos.y, previous_img.Width, previous_img.Height, 0, 0, previous_img.Width, previous_img.Height);
+		
+		if (!stopped && !fb.IsPaused) {
+			gr.DrawImage(pause_img, button_pos.x + button_pos.space, button_pos.y, pause_img.Width, pause_img.Height, 0, 0, pause_img.Width, pause_img.Height)
+		}
+		else {
+			gr.DrawImage(play_img, button_pos.x + button_pos.space, button_pos.y, play_img.Width, play_img.Height, 0, 0, play_img.Width, play_img.Height)
+		}
+		
+		gr.DrawImage(next_img, button_pos.x + 2*button_pos.space, button_pos.y, next_img.Width, next_img.Height, 0, 0, next_img.Width, next_img.Height);
+		
+		if (!is_shuffled) {
+			gr.DrawImage(shuffle_off_img, button_pos.x + 3*button_pos.space, button_pos.y, shuffle_off_img.Width, shuffle_off_img.Height, 0, 0, shuffle_off_img.Width, shuffle_off_img.Height)
+		}
+		else {
+			gr.DrawImage(shuffle_on_img, button_pos.x + 3*button_pos.space, button_pos.y, shuffle_on_img.Width, shuffle_on_img.Height, 0, 0, shuffle_on_img.Width, shuffle_on_img.Height)
+		}
+		
+		// Display layout buttons
+		gr.DrawImage(switch_monitor, monitor_x, monitor_y, monitor_w, monitor_h, 0, 0, monitor_w, monitor_h);	
+		gr.DrawImage(browse, browse_x, browse_y, browse_w, browse_h, 0, 0, browse_w, browse_h);
+		gr.DrawImage(hide, toolbar_x, toolbar_y, toolbar_w, toolbar_h, 0, 0, toolbar_w, toolbar_h);
+	}
+	
+	// Display volume if changed
+	if (show_volume) {
+		volume = fb.Volume;
+		vol_pos = vol_h*vol2pos(fb.Volume);
+		vol_txt = volume.toFixed(2) + 'dB';
+	
+		FillGradientRectangle(gr, vol_x, vol_y + vol_h - vol_pos, vol_w, vol_pos, 0, colours.progress1, colours.progress2);
+		gr.DrawRectangle(vol_x, vol_y, vol_w, vol_h, 1.0, colours.outline);
+		
+		gr.WriteTextSimple(vol_txt, font.tiny, colours.dark, vol_x - 82, vol_y-40, 160 + vol_w, 24, 2, 1);
+		gr.WriteTextSimple(vol_txt, font.tiny, colours.light, vol_x - 80, vol_y-40, 160 + vol_w, 24, 2, 1);
+		
+		timer_over = run_g_timer(2);
+		if (timer_over) {
+			show_volume = false;
+			window.Repaint();
+		}		
+	}
+}
+
+function on_playback_dynamic_info_track(type) {
+	if (type == 0) {
+		images.playback_new_track();
+	}
+}
+
+function on_playback_new_track() {
+	panel.item_focus_change();
+	images.playback_new_track();
+	stopped = false;
+	buttons.update();
+	window.Repaint();
+}
+
+function on_playback_starting() {
+	panel.item_focus_change();
+	images.playback_new_track();
+	stopped = false;
+	buttons.update();
+	window.Repaint();
+}
+
+function on_playback_pause() {
+	seekbar.playback_seek();
+	images.update();
+	buttons.update();
+	window.Repaint();
+}
+
+function on_playback_stop(reason) {
+	if (reason != 2) {
+		panel.item_focus_change();
+	}
+	stopped = true;
+	buttons.update();
+	window.Repaint();
+}
+
+function on_playback_order_changed() {	
+	is_shuffled = change_bool(is_shuffled)
+	buttons.update();
+    window.Repaint();
+}
+
+function on_playback_time() {
+	images.playback_time();
+	stopped = false;
+	window.Repaint();
+}
+
+function on_playlist_switch() {
+	on_item_focus_change();
+}
+
+function on_volume_change(val) {
+	show_volume = true;
+	g_count = 0;
+	window.Repaint();
+}
+
+function on_size() {
+	panel.size();
+
+	images.w = panel.w*0.72;
+	images.h = panel.h*0.72;
+	wh = window.Height;
+	ww = window.Width;
+	
+	seekbar.x = 0.15*window.Width;
+	seekbar.y = 0.945*window.Height;
+	seekbar.w = 0.7*window.Width;
+	seekbar.h = 0.015*window.Height;
+	
+	monitor_x = window.Width - 106;
+	monitor_y = window.Height - 59;
+	monitor_w = 32;
+	monitor_h = 48;
+	
+	browse_x = window.Width - 58;
+	browse_y = window.Height - 58;
+	browse_w = 40;
+	browse_h = 40;
+	
+	toolbar_x = window.Width - 48;
+	toolbar_y = 10;
+	toolbar_w = 36;
+	toolbar_h = 36;
+	
+	vol_x = 0.92*window.Width;
+	vol_y = 0.40*window.Height;
+	vol_w = 0.008*window.Width;
+	vol_h = 0.20*window.Height;
+	volume = fb.Volume;
+	vol_pos = vol_w*vol2pos(fb.Volume);
+	vol_txt = fb.Volume.toFixed(2) + 'dB';
+	
+	button_pos = {
+		x : window.Width/2 - _scale(1.2*button_size) + 10,
+		y : seekbar.y - 1.25*button_size,
+		space : bs,
+	};
+	
+	buttons.update();
+}
