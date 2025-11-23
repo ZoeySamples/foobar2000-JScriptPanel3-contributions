@@ -58,7 +58,7 @@ var buttons = new _buttons();
 var bs = _scale(0.6*button_size);
 
 // Set the folder name to be the location of your playback icons
-var folder_name = "D:\\Pictures\\foobar2000 icons\\superpanel\\";
+var folder_name = "D:\\Pictures\\foobar2000 icons\\fullscreen_widget\\";
 var img = utils.LoadImage(folder_name + "previous.png");
 var previous_img = get_button_image(img, 0.8*bs, bs);
 
