@@ -9,9 +9,12 @@ I use the 64-bit version of foobar2000. I'm not sure if these scripts will
 work in the 32-bit version.
 
 ## Requirements
-[(Foobar2000 (64-bit))](https://www.foobar2000.org/windows)
+[Foobar2000 (64-bit)](https://www.foobar2000.org/windows)
+
 [Popup Panels component](https://www.foobar2000.org/components/view/foo_popup_panels)
+
 [Columns UI component](https://www.foobar2000.org/components/view/foo_ui_columns)
+
 [JScript Panel 3 component, also included in this directory](https://web.archive.org/web/20241208095928/https://jscript-panel.github.io/docs/)
 
 ## How to Use My Widgets
