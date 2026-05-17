@@ -1,5 +1,8 @@
 ## Requirements
 
+### [Popup Panels component](https://www.foobar2000.org/components/view/foo_popup_panels)
+### [Columns UI component](https://www.foobar2000.org/components/view/foo_ui_columns)
+
 1. Make sure JScript Panel is installed in foobar2000. I have included the download to the component on the root directory.
 2. Download the support file and place it in the JScript Panel 3 AppData custom folder that you created, as specified in the parent directory.
 3. AppData files will go in your JScript Panel 3 AppData custom folder that you created, as specified in the parent directory.
