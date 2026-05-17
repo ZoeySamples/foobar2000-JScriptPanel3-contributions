@@ -10,14 +10,14 @@
 
 ## Features
 
-### Automatically adapts to user-input resolution and monitor orientation
-### Press L to toggle Lyrics popup window, if configured correctly. You will have to copy the script from my Lyrics-Panel subdirectory.
-### Press H to toggle "hide clutter". This removes buttons and makes the appearance more minimalist.
-### Blurred album art colors in background
-### Playback button presses have a button-press animation
-### Use scroll wheel to change volume
-### Volume level shows briefly on volume change, before vanishing
-### Click and drag seekbar
-### Ability to switch layouts with the buttons in the corner, if layouts are configured correctly
-### Shuffle button that toggles appearance when selecting it
-### Automatically changing fontsize to make room for longer titles
+- Automatically adapts to user-input resolution and monitor orientation
+- Press L to toggle Lyrics popup window, if configured correctly. You will have to copy the script from my Lyrics-Panel subdirectory.
+- Press H to toggle "hide clutter". This removes buttons and makes the appearance more minimalist.
+- Blurred album art colors in background
+- Playback button presses have a button-press animation
+- Use scroll wheel to change volume
+- Volume level shows briefly on volume change, before vanishing
+- Click and drag seekbar
+- Ability to switch layouts with the buttons in the corner, if layouts are configured correctly
+- Shuffle button that toggles appearance when selecting it
+- Automatically changing fontsize to make room for longer titles
