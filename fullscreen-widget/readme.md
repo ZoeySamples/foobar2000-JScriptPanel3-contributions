@@ -11,7 +11,7 @@
 ## Features
 
 - Automatically adapts to user-input resolution and monitor orientation
-- Press L to toggle Lyrics popup window, if configured correctly. You will have to copy the script from my Lyrics-Panel subdirectory.
+- Press L to toggle Lyrics popup window, if configured correctly. You will have to copy the script from my [lyrics-widget](https://github.com/ZoeySamples/foobar2000-JScriptPanel3-contributions/tree/main/lyrics-widget) subdirectory.
 - Press H to toggle "hide clutter". This removes buttons and makes the appearance more minimalist.
 - Blurred album art colors in background
 - Playback button presses have a button-press animation
