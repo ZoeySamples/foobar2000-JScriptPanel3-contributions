@@ -1,18 +1,17 @@
 // ==PREPROCESSOR==
 // @name "Togglable Shuffle Button"
-// @author "marc2003"
-// @contributors "scarbles"
+// @author "scarbles"
+// @contributors "marc2003"
 // @import "lodash"
 // @import "%fb2k_component_path%helpers.txt"
 // @import "%fb2k_component_path%samples\js\common.js"
 // @import "%fb2k_component_path%samples\js\panel.js"
 // ==/PREPROCESSOR==
+//////////////////////////////////////////////////////////////
 
 var colours = {
 	background : RGB(240, 240, 240),
 };
-
-//////////////////////////////////////////////////////////////
 
 var panel = new _panel();
 var buttons = new _buttons();
