@@ -9,10 +9,10 @@ I use the 64-bit version of foobar2000. I'm not sure if these scripts will
 work in the 32-bit version.
 
 ## Requirements
-(https://www.foobar2000.org/windows)[# Foobar2000 (64-bit)]
-(https://www.foobar2000.org/components/view/foo_popup_panels)[# Popup Panels component]
-(https://www.foobar2000.org/components/view/foo_ui_columns)[# Columns UI component]
-(https://web.archive.org/web/20241208095928/https://jscript-panel.github.io/docs/)[# JScript Panel 3 component, also included in this directory]
+(https://www.foobar2000.org/windows)[Foobar2000 (64-bit)]
+(https://www.foobar2000.org/components/view/foo_popup_panels)[Popup Panels component]
+(https://www.foobar2000.org/components/view/foo_ui_columns)[Columns UI component]
+(https://web.archive.org/web/20241208095928/https://jscript-panel.github.io/docs/)[JScript Panel 3 component, also included in this directory]
 
 ## How to Use My Widgets
 1. Go into the desired subfolder and read any readme files.
