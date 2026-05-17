@@ -10,7 +10,7 @@
 
 ## Features
 
-### Automatically adapts to user-input resolution and monitor orientation
+### Adapts to user-input resolution and monitor orientation
 ### Subtle blurred album art colors behind panel
 ### Playback button presses have a button-press animation
 ### Use scroll wheel to change volume if hovering over playback widget
