@@ -1,4 +1,4 @@
-##Overview
+## Overview
 Here is where I will upload some scripts I've made for JScript Panel 3 in
 foobar2000. The source code for each script is in its own subfolder with
 the necessary source media to make it work. I have also included a copy of
@@ -8,13 +8,13 @@ abandoned.
 I use the 64-bit version of foobar2000. I'm not sure if these scripts will
 work in the 32-bit version.
 
-##Requirements
-(https://www.foobar2000.org/windows)[#Foobar2000 (64-bit)]
-(https://www.foobar2000.org/components/view/foo_popup_panels)[#Popup Panels component]
-(https://www.foobar2000.org/components/view/foo_ui_columns)[#Columns UI component]
-(https://web.archive.org/web/20241208095928/https://jscript-panel.github.io/docs/)[#JScript Panel 3 component, also included in this directory]
+## Requirements
+(https://www.foobar2000.org/windows)[# Foobar2000 (64-bit)]
+(https://www.foobar2000.org/components/view/foo_popup_panels)[# Popup Panels component]
+(https://www.foobar2000.org/components/view/foo_ui_columns)[# Columns UI component]
+(https://web.archive.org/web/20241208095928/https://jscript-panel.github.io/docs/)[# JScript Panel 3 component, also included in this directory]
 
-##How to Use My Widgets
+## How to Use My Widgets
 1. Go into the desired subfolder and read any readme files.
 2. JScript Panel 3 will use sample scripts from a folder stored in your AppData. Some of these files are referenced in my scripts, as well as some custom scripts. To make sure the widgets run, you'll have to go into your jscript_panel3 subfolder:Type %AppData% into your File Explorer Window. Then, click on foobar2000-v2 > user-components-64x > foo_jscript_panel3. Make a new folder, called `custom`. This is where you will copy and paste my support files.
 3. Copy any .js support files and put those in the custom folder you added to the jscript_panel3 AppData folder.
