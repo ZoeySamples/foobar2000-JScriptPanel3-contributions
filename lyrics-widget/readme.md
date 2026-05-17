@@ -1,5 +1,6 @@
 ## Requirements
 
+Make sure you have the following components installed:
 ### [Popup Panels component](https://www.foobar2000.org/components/view/foo_popup_panels)
 ### [Columns UI component](https://www.foobar2000.org/components/view/foo_ui_columns)
 
