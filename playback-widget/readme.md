@@ -10,12 +10,12 @@
 
 ## Features
 
-Adapts to user-input resolution and monitor orientation
-Subtle blurred album art colors behind panel
-Playback button presses have a button-press animation
-Use scroll wheel to change volume if hovering over playback widget
-Volume level shows briefly on volume change, before vanishing
-Click and drag seekbar or volume slider
-Ability to switch layouts with the buttons in the corner, if layouts are configured correctly
-Shuffle button that toggles appearance when selecting it
-Automatically changing fontsize to make room for longer titles
+- Adapts to user-input resolution and monitor orientation
+- Subtle blurred album art colors behind panel
+- Playback button presses have a button-press animation
+- Use scroll wheel to change volume if hovering over playback widget
+- Volume level shows briefly on volume change, before vanishing
+- Click and drag seekbar or volume slider
+- Ability to switch layouts with the buttons in the corner, if layouts are configured correctly
+- Shuffle button that toggles appearance when selecting it
+- Automatically changing fontsize to make room for longer titles
