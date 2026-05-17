@@ -17,8 +17,9 @@ work in the 32-bit version.
 ## How to Use My Widgets
 1. Go into the desired subfolder and read any readme files.
 2. JScript Panel 3 will use sample scripts from a folder stored in your AppData. Some of these files are referenced in my scripts, as well as some custom scripts. To make sure the widgets run, you'll have to go into your jscript_panel3 subfolder.
-3. To do this, type %AppData% into your File Explorer Window. Then, click on `foobar2000-v2` > `user-components-64x` > `foo_jscript_panel3`. Make a new folder, called `custom`. This is where you will copy and paste my support files.
-4. Copy any .js support files and put those in the custom folder you added to the jscript_panel3 AppData folder.
-5.  Copy any necessary media (I have a bunch of custom .png files in my scripts. Feel free to use those or make your own), and place them in a folder of your choosing. You will have to edit the paths of these folders in the widgets' JScript Panel 3 scripts!
-6.  Copy the widget .js files and paste them into your JScript Panel 3 panels in your Columns UI layout.
-7.  Edit any necessary information in the .js files, such as screen resolution, file paths, and other preferences. All of these settings will be very clearly commented in the .js files, so you should be able to find them if you read the scripts.
+3. To do this, type `%AppData%` into your File Explorer Window. Then, click on `foobar2000-v2` > `user-components-64x` > `foo_jscript_panel3`. The full file path is `\AppData\Roaming\foobar2000-v2\user-components-x64\foo_jscript_panel3`
+4. Make a new folder, called `custom`. This is where you will copy and paste my support files.
+5. Copy any .js support files and put those in the custom folder you added to the jscript_panel3 AppData folder.
+6.  Copy any necessary media (I have a bunch of custom .png files in my scripts. Feel free to use those or make your own), and place them in a folder of your choosing. You will have to edit the paths of these folders in the widgets' JScript Panel 3 scripts!
+7.  Copy the widget .js files and paste them into your JScript Panel 3 panels in your Columns UI layout.
+8.  Edit any necessary information in the .js files, such as screen resolution, file paths, and other preferences. All of these settings will be very clearly commented in the .js files, so you should be able to find them if you read the scripts.
