@@ -13,6 +13,6 @@ Make sure you have the following components installed:
 
 ## Features
 
-### Automatically adapts to user-input resolution and monitor orientation
+### Adapts to user-input resolution and monitor orientation
 ### Blurred album art colors in background
 ### Ability to scroll through the lyrics when hovering over the popup panel
